@@ -8,6 +8,13 @@ ThemeData get currentTheme => Theme.of(currentContext);
 
 ColorScheme get currentColorScheme => currentTheme.colorScheme;
 
+T? asT<T>(dynamic value) {
+  if (value is T) {
+    return value;
+  }
+  return null;
+}
+
 class Instance {
   static final Instance _instance = Instance._internal();
 
