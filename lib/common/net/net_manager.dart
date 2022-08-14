@@ -29,19 +29,19 @@ class LRNetManager {
         baseUrl: "https://api.apiopen.top/api", connectTimeout: 5000);
     _dio = Dio(options);
     //设置Http代理
-    if (kDebugMode) {
-      //debug模式下开启代理
-      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (client) {
-        // config the http client
-        client.findProxy = (uri) {
-          //proxy all request to localhost:8888
-          return 'PROXY 192.168.10.10:8888';
-        };
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) => true;
-      };
-    }
+    // if (kDebugMode) {
+    //   //debug模式下开启代理
+    //   (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    //       (client) {
+    //     // config the http client
+    //     client.findProxy = (uri) {
+    //       //proxy all request to localhost:8888
+    //       return 'PROXY 192.168.10.10:8888';
+    //     };
+    //     client.badCertificateCallback =
+    //         (X509Certificate cert, String host, int port) => true;
+    //   };
+    // }
   }
 
   static Future<LRNetResponse<T>> post<T>(String url, {Map? pra}) async {

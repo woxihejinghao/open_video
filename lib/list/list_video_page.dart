@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:chewie/chewie.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -23,22 +21,23 @@ class _ListVideoPageState extends State<ListVideoPage> {
   final EasyRefreshController _refreshController = EasyRefreshController();
 
   //视频控制器流
-  final StreamController<Map> _streamController = StreamController.broadcast();
+  final StreamController<VideoPlayerController> _streamController =
+      StreamController.broadcast();
   VideoPlayerController? _videoPlayerController;
-  ChewieController? _chewieController;
 
   @override
   void initState() {
     super.initState();
     _loadData();
     _streamController.stream.listen((event) {
-      VideoPlayerController newVideoController = event["videoController"];
-      ChewieController newChewieController = event["chewieController"];
+      VideoPlayerController newVideoController = event;
+
       if (_videoPlayerController != null &&
           newVideoController.textureId != _videoPlayerController?.textureId) {
         _videoPlayerController?.pause();
       }
-      _chewieController = newChewieController;
+      debugPrint("切换播放");
+
       _videoPlayerController = newVideoController;
     });
   }

@@ -29,13 +29,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.1"
-  chewie:
-    dependency: "direct main"
-    description:
-      name: chewie
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.3.4"
   clock:
     dependency: transitive
     description:
@@ -212,13 +205,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.7.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -239,7 +225,7 @@ packages:
       name: path_provider_android
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.17"
+    version: "2.0.19"
   path_provider_ios:
     dependency: transitive
     description:
@@ -274,7 +260,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   platform:
     dependency: transitive
     description:
@@ -296,13 +282,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.2.4"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "6.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -370,7 +349,7 @@ packages:
       name: video_player
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.4.5"
+    version: "2.4.6"
   video_player_android:
     dependency: transitive
     description:
@@ -391,7 +370,7 @@ packages:
       name: video_player_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.1.3"
+    version: "5.1.4"
   video_player_web:
     dependency: transitive
     description:
@@ -399,41 +378,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.12"
-  wakelock:
-    dependency: transitive
-    description:
-      name: wakelock
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.6.2"
-  wakelock_macos:
-    dependency: transitive
-    description:
-      name: wakelock_macos
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.4.0"
-  wakelock_platform_interface:
-    dependency: transitive
-    description:
-      name: wakelock_platform_interface
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.3.0"
-  wakelock_web:
-    dependency: transitive
-    description:
-      name: wakelock_web
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.4.0"
-  wakelock_windows:
-    dependency: transitive
-    description:
-      name: wakelock_windows
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
   win32:
     dependency: transitive
     description:

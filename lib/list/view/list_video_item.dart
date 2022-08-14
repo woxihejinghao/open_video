@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:chewie/chewie.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:open_video/list/model/list_video_model.dart';
+import 'package:open_video/list/view/video_control_view.dart';
 import 'package:video_player/video_player.dart';
 
 class ListVideoItem extends StatefulWidget {
@@ -22,10 +22,10 @@ class ListVideoItem extends StatefulWidget {
 class _ListVideoItemState extends State<ListVideoItem> {
   VideoPlayerController? _controller;
 
-  ChewieController? _chewieController;
   @override
   void initState() {
     super.initState();
+    _controller = VideoPlayerController.network(widget.model.playurl);
   }
 
   @override
@@ -39,22 +39,15 @@ class _ListVideoItemState extends State<ListVideoItem> {
           children: [
             Positioned.fill(
                 child: ExtendedImage.network(widget.model.coverurl)),
-            Positioned(left: 0, right: 0, bottom: 0, child: _buildUserInfo()),
-            if (_controller?.value.isInitialized ?? false)
-              Positioned.fill(child: Chewie(controller: _chewieController!)),
-            Offstage(
-              offstage: _controller?.value.isInitialized ?? false,
-              child: InkWell(
-                onTap: () {
-                  _initVideo();
+            if (_controller != null)
+              Positioned.fill(
+                  child: VideoControlView(
+                controller: _controller!,
+                tapCallback: () {
+                  widget.streamController.add(_controller);
                 },
-                child: const Icon(
-                  Icons.play_arrow_rounded,
-                  color: Colors.white70,
-                  size: 80,
-                ),
-              ),
-            )
+              )),
+            Positioned(left: 0, right: 0, top: 0, child: _buildUserInfo()),
           ],
         ),
       ),
@@ -69,8 +62,8 @@ class _ListVideoItemState extends State<ListVideoItem> {
         children: [
           ExtendedImage.network(
             widget.model.userpic,
-            width: 40,
-            height: 40,
+            width: 35,
+            height: 35,
             fit: BoxFit.cover,
             shape: BoxShape.circle,
           ),
@@ -79,23 +72,16 @@ class _ListVideoItemState extends State<ListVideoItem> {
           ),
           Text(
             widget.model.username,
-            style: const TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           )
         ],
       ),
     );
   }
 
-  _initVideo() async {
-    _controller = VideoPlayerController.network(widget.model.playurl);
-    await _controller?.initialize();
-    _chewieController =
-        ChewieController(videoPlayerController: _controller!, autoPlay: true);
-    Map map = {
-      "videoController": _controller,
-      "chewieController": _chewieController
-    };
-    widget.streamController.add(map);
-    setState(() {});
+  @override
+  void dispose() {
+    super.dispose();
+    _controller?.dispose();
   }
 }
