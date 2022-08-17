@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:open_video/common/net/net_manager.dart';
 import 'package:open_video/list/model/list_video_model.dart';
 import 'package:open_video/list/view/list_video_item.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:video_player/video_player.dart';
 
 class ListVideoPage extends StatefulWidget {
@@ -18,7 +15,10 @@ class ListVideoPage extends StatefulWidget {
 
 class _ListVideoPageState extends State<ListVideoPage> {
   List<ListVideoModel> _dataList = [];
-  final EasyRefreshController _refreshController = EasyRefreshController();
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: true);
+  //当前页码
+  int _currentPage = 0;
 
   //视频控制器流
   final StreamController<VideoPlayerController> _streamController =
@@ -28,7 +28,7 @@ class _ListVideoPageState extends State<ListVideoPage> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    _onRefresh();
     _streamController.stream.listen((event) {
       VideoPlayerController newVideoController = event;
 
@@ -48,8 +48,11 @@ class _ListVideoPageState extends State<ListVideoPage> {
       appBar: AppBar(
         title: const Text("列表"),
       ),
-      body: EasyRefresh(
+      body: SmartRefresher(
         controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        enablePullUp: true,
         child: ListView.builder(
           itemCount: _dataList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -63,17 +66,30 @@ class _ListVideoPageState extends State<ListVideoPage> {
     );
   }
 
-  _loadData() async {
+  _onRefresh() async {
     var response =
         await LRNetManager.get("/getHaoKanVideo", pra: {"page": 0, "size": 10});
+    _refreshController.refreshCompleted();
     if (response.success) {
-      debugPrint("请求数据:${response.data}");
+      _currentPage = 0;
       setState(() {
         List list = response.data["list"];
         _dataList = list.map((e) => ListVideoModel.fromJson(e)).toList();
       });
-    } else {
-      debugPrint("请求失败");
+    }
+  }
+
+  _onLoading() async {
+    var response = await LRNetManager.get("/getHaoKanVideo",
+        pra: {"page": _currentPage + 1, "size": 10});
+    _refreshController.refreshCompleted();
+    if (response.success) {
+      _currentPage += 1;
+      setState(() {
+        List list = response.data["list"];
+        var dataList = list.map((e) => ListVideoModel.fromJson(e)).toList();
+        _dataList.addAll(dataList);
+      });
     }
   }
 }

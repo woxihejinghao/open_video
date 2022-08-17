@@ -6,6 +6,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:open_video/list/model/list_video_model.dart';
 import 'package:open_video/list/view/video_control_view.dart';
+import 'package:open_video/list/view/video_full_screen_view.dart';
 import 'package:video_player/video_player.dart';
 
 class ListVideoItem extends StatefulWidget {
@@ -45,6 +46,11 @@ class _ListVideoItemState extends State<ListVideoItem> {
                 controller: _controller!,
                 tapCallback: () {
                   widget.streamController.add(_controller);
+                },
+                fullScreenCallback: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => VideoFullScreenView(
+                          playerController: _controller!))));
                 },
               )),
             Positioned(left: 0, right: 0, top: 0, child: _buildUserInfo()),

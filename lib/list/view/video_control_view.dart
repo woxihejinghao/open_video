@@ -6,7 +6,12 @@ import 'package:video_player/video_player.dart';
 class VideoControlView extends StatefulWidget {
   final VideoPlayerController controller;
   final VoidCallback? tapCallback;
-  VideoControlView({Key? key, required this.controller, this.tapCallback})
+  final VoidCallback? fullScreenCallback;
+  VideoControlView(
+      {Key? key,
+      required this.controller,
+      this.tapCallback,
+      this.fullScreenCallback})
       : super(key: key);
 
   @override
@@ -58,13 +63,7 @@ class _VideoControlViewState extends State<VideoControlView> {
                 builder: (BuildContext context, bool value, Widget? child) {
                   return !value
                       ? Container()
-                      : VideoProgressIndicator(
-                          widget.controller,
-                          allowScrubbing: true,
-                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                          colors: VideoProgressColors(
-                              playedColor: currentColorScheme.primary),
-                        );
+                      : _buildProgressAndFullScreenButton();
                 },
               ),
             ],
@@ -101,5 +100,28 @@ class _VideoControlViewState extends State<VideoControlView> {
     } else {
       widget.controller.play();
     }
+  }
+
+  _buildProgressAndFullScreenButton() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        if (widget.fullScreenCallback != null)
+          IconButton(
+              onPressed: () {
+                if (widget.fullScreenCallback != null) {
+                  widget.fullScreenCallback!();
+                }
+              },
+              icon: const Icon(Icons.fullscreen_rounded, color: Colors.white)),
+        VideoProgressIndicator(
+          widget.controller,
+          allowScrubbing: true,
+          padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+          colors: VideoProgressColors(playedColor: currentColorScheme.primary),
+        )
+      ],
+    );
   }
 }
