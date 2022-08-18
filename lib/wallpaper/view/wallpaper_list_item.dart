@@ -13,7 +13,7 @@ class WallpaperListItem extends StatelessWidget {
     return Card(
       child: ExtendedImage.network(
         model.url,
-        compressionRatio: 0.5,
+        compressionRatio: 0.4,
         fit: BoxFit.cover,
         enableMemoryCache: true,
         clearMemoryCacheWhenDispose: true,

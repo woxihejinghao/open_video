@@ -36,7 +36,6 @@ class _ListVideoPageState extends State<ListVideoPage> {
           newVideoController.textureId != _videoPlayerController?.textureId) {
         _videoPlayerController?.pause();
       }
-      debugPrint("切换播放");
 
       _videoPlayerController = newVideoController;
     });
@@ -48,7 +47,7 @@ class _ListVideoPageState extends State<ListVideoPage> {
       appBar: AppBar(
         centerTitle: false,
         title: const Text(
-          "列表",
+          "多看",
           style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
         ),
       ),
