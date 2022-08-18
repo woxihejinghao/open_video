@@ -35,6 +35,9 @@ dependencies:
   dio: ^4.0.6
   pull_to_refresh: ^2.0.0
   extended_image: ^6.2.1
+  fluttertoast: ^8.0.9
+  image_gallery_saver: ^1.7.1
+  permission_handler: ^10.0.0
 
 dev_dependencies:
   flutter_test:

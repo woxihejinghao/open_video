@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:open_video/common/instance.dart';
 import 'package:open_video/full_screen/full_screen_video_page.dart';
 import 'package:open_video/list/list_video_page.dart';
 import 'package:open_video/wallpaper/wallpaper_page.dart';
@@ -24,6 +25,12 @@ class _MainTabPageState extends State<MainTabPage> {
   ];
 
   var _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast.init(context);
+  }
 
   @override
   Widget build(BuildContext context) {

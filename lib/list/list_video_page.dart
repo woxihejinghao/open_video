@@ -46,7 +46,11 @@ class _ListVideoPageState extends State<ListVideoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("列表"),
+        centerTitle: false,
+        title: const Text(
+          "列表",
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+        ),
       ),
       body: SmartRefresher(
         controller: _refreshController,
