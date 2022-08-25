@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:open_video/common/instance.dart';
-import 'package:open_video/full_screen/full_screen_video_page.dart';
+import 'package:open_video/douyi/douyin_video_page.dart';
 import 'package:open_video/list/list_video_page.dart';
+import 'package:open_video/provider/common_provider.dart';
 import 'package:open_video/wallpaper/wallpaper_page.dart';
+import 'package:provider/provider.dart';
 
 class MainTabPage extends StatefulWidget {
   const MainTabPage({Key? key}) : super(key: key);
@@ -21,7 +23,7 @@ class _MainTabPageState extends State<MainTabPage> {
   final List<Widget> myPages = const [
     ListVideoPage(),
     WallpaperPage(),
-    FullScreenVideoPage()
+    DouYinVideoPage()
   ];
 
   var _currentPage = 0;
@@ -43,6 +45,7 @@ class _MainTabPageState extends State<MainTabPage> {
         items: bottomNavItems,
         currentIndex: _currentPage,
         onTap: (index) {
+          context.read<CommonProvider>().changeSelectTabIndex(index);
           setState(() {
             _currentPage = index;
           });
