@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:open_video/common/net/net_manager.dart';
-import 'package:open_video/wallpaper/model/wallpaper_list_model.dart';
-import 'package:open_video/wallpaper/view/wallpaper_list_item.dart';
-import 'package:open_video/wallpaper/wallpaper_browse_page.dart';
+import 'package:open_video/pages/wallpaper/model/wallpaper_list_model.dart';
+import 'package:open_video/pages/wallpaper/view/wallpaper_list_item.dart';
+import 'package:open_video/pages/wallpaper/wallpaper_browse_page.dart';
+
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class WallpaperListPage extends StatefulWidget {

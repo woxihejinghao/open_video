@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:open_video/common/instance.dart';
-import 'package:open_video/douyi/douyin_video_page.dart';
-import 'package:open_video/list/list_video_page.dart';
+import 'package:open_video/pages/douyi/douyin_video_page.dart';
+import 'package:open_video/pages/listVideo/list_video_page.dart';
+import 'package:open_video/pages/wallpaper/wallpaper_page.dart';
 import 'package:open_video/provider/common_provider.dart';
-import 'package:open_video/wallpaper/wallpaper_page.dart';
 import 'package:provider/provider.dart';
 
 class MainTabPage extends StatefulWidget {

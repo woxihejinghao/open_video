@@ -2,7 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:open_video/wallpaper/model/wallpaper_list_model.dart';
+import 'package:open_video/pages/wallpaper/model/wallpaper_list_model.dart';
 
 class WallpaperListItem extends StatelessWidget {
   final WallpaperListModel model;

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:open_video/list/view/video_control_view.dart';
+import 'package:open_video/pages/listVideo/view/video_control_view.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoFullScreenView extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:open_video/common/instance.dart';
-import 'package:open_video/douyi/model/douyi_list_model.dart';
+import 'package:open_video/pages/douyi/model/douyi_list_model.dart';
 import 'package:open_video/provider/common_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';

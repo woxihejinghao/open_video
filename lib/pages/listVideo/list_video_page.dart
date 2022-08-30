@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:open_video/common/net/net_manager.dart';
-import 'package:open_video/list/model/list_video_model.dart';
-import 'package:open_video/list/view/list_video_item.dart';
+import 'package:open_video/pages/listVideo/model/list_video_model.dart';
+import 'package:open_video/pages/listVideo/view/list_video_item.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:video_player/video_player.dart';
 

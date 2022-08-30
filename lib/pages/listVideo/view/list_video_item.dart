@@ -2,11 +2,9 @@ import 'dart:async';
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:open_video/list/model/list_video_model.dart';
-import 'package:open_video/list/view/video_control_view.dart';
-import 'package:open_video/list/view/video_full_screen_view.dart';
+import 'package:open_video/pages/listVideo/model/list_video_model.dart';
+import 'package:open_video/pages/listVideo/view/video_control_view.dart';
+import 'package:open_video/pages/listVideo/view/video_full_screen_view.dart';
 import 'package:video_player/video_player.dart';
 
 class ListVideoItem extends StatefulWidget {

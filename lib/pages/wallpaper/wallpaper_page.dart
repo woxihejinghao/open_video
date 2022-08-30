@@ -1,12 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:open_video/common/net/net_manager.dart';
-import 'package:open_video/wallpaper/model/wallpaper_list_model.dart';
-import 'package:open_video/wallpaper/view/wallpaper_list_item.dart';
-import 'package:open_video/wallpaper/wallpaper_browse_page.dart';
-import 'package:open_video/wallpaper/wallpaper_list_page.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:open_video/pages/wallpaper/wallpaper_list_page.dart';
 
 class WallpaperPage extends StatefulWidget {
   const WallpaperPage({Key? key}) : super(key: key);

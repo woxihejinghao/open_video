@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:open_video/common/net/net_manager.dart';
-import 'package:open_video/douyi/model/douyi_list_model.dart';
-import 'package:open_video/douyi/view/douyi_video_item.dart';
+import 'package:open_video/pages/douyi/model/douyi_list_model.dart';
+import 'package:open_video/pages/douyi/view/douyi_video_item.dart';
 
 class DouYinVideoPage extends StatefulWidget {
   const DouYinVideoPage({Key? key}) : super(key: key);
