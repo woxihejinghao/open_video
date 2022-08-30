@@ -85,7 +85,7 @@ class _ListVideoPageState extends State<ListVideoPage> {
   _onLoading() async {
     var response = await LRNetManager.get("/getHaoKanVideo",
         pra: {"page": _currentPage + 1, "size": 10});
-    _refreshController.refreshCompleted();
+    _refreshController.loadComplete();
     if (response.success) {
       _currentPage += 1;
       setState(() {

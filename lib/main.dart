@@ -1,7 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:open_video/common/instance.dart';
-import 'package:open_video/main_tab_page.dart';
+import 'package:open_video/common/route/router.dart';
+import 'package:open_video/pages/main_tab_page.dart';
 import 'package:open_video/provider/common_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,15 +13,26 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  _MyAppState() {
+    //配置路由
+    Routes.configureRoutes();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'OpenVideo',
       navigatorKey: Instance.navigatorKey,
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: router.generator,
       theme: FlexThemeData.light(
         scheme: FlexScheme.blumineBlue,
         surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
@@ -58,8 +70,6 @@ class MyApp extends StatelessWidget {
 // If you do not have a themeMode switch, uncomment this line
 // to let the device system mode control the theme mode:
 // themeMode: ThemeMode.system,
-
-      home: const MainTabPage(),
     );
   }
 }
