@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:open_video/common/net/net_manager.dart';
 import 'package:open_video/common/route/router.dart';
+
+import '../../common/instance.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,6 +18,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _accountController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    fToast.init(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.fromLTRB(
                 30, MediaQuery.of(context).size.height * 0.1, 30, 0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextField(
                   controller: _accountController,
@@ -55,12 +66,10 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    router.navigateTo(context, Routes.main, clearStack: true);
-                  },
+                  onPressed: _login,
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(
-                      100,
+                      double.infinity,
                       50,
                     ),
                   ),
@@ -68,12 +77,41 @@ class _LoginPageState extends State<LoginPage> {
                     "登录",
                     style: TextStyle(fontSize: 20),
                   ),
-                )
+                ),
+                _buildRegistButton()
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildRegistButton() {
+    return TextButton(
+        onPressed: () {
+          context.lrNavigatorTo(Routes.regist);
+        },
+        child: const Text(
+          "去注册",
+          style: TextStyle(fontSize: 15),
+        ));
+  }
+
+  _login() async {
+    String account = _accountController.text;
+    String password = _passwordController.text;
+    showLoading();
+    var response = await LRNetManager.post("/login",
+        pra: {"account": account, "password": password});
+    dismissLoading();
+    if (!response.success) {
+      showToast(response.message);
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+    router.lrNavigatorTo(context, Routes.main, clearStack: true);
   }
 }
