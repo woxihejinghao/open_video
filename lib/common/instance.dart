@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:open_video/views/loading_toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 NavigatorState get navigatorState => Instance.navigatorKey.currentState!;
 //当前上下文
@@ -9,6 +10,8 @@ BuildContext get currentContext => navigatorState.context;
 ThemeData get currentTheme => Theme.of(currentContext);
 
 ColorScheme get currentColorScheme => currentTheme.colorScheme;
+
+SharedPreferences get sharedPreferences => Instance().sharedPreferences;
 
 FToast fToast = FToast();
 
@@ -37,6 +40,7 @@ dismissLoading() {
 
 class Instance {
   static final Instance _instance = Instance._internal();
+  late SharedPreferences sharedPreferences;
 
   factory Instance() {
     return _instance;
@@ -45,4 +49,8 @@ class Instance {
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
+
+  initCommonData() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+  }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:open_video/common/instance.dart';
 import 'package:open_video/common/net/net_manager.dart';
 import 'package:open_video/common/route/router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistPage extends StatefulWidget {
   const RegistPage({Key? key}) : super(key: key);
@@ -33,38 +34,42 @@ class _RegistPageState extends State<RegistPage> {
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () => FocusScope.of(context).requestFocus,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                30, MediaQuery.of(context).size.height * 0.1, 30, 0),
-            child: Column(
-              children: [
-                TextField(
-                  controller: _accountController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                      hintText: "请输入邮箱",
-                      prefixIcon: Icon(Icons.email_outlined)),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                _buildCodeTextfield(),
-                const SizedBox(
-                  height: 15,
-                ),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                      hintText: "请输入密码", prefixIcon: Icon(Icons.lock_outline)),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                _buildRegistButton()
-              ],
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        child: SizedBox(
+          height: double.infinity,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                  30, MediaQuery.of(context).size.height * 0.1, 30, 0),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _accountController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                        hintText: "请输入邮箱",
+                        prefixIcon: Icon(Icons.email_outlined)),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  _buildCodeTextfield(),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                        hintText: "请输入密码",
+                        prefixIcon: Icon(Icons.lock_outline)),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _buildRegistButton()
+                ],
+              ),
             ),
           ),
         ),
@@ -139,6 +144,8 @@ class _RegistPageState extends State<RegistPage> {
       showToast(response.message);
       return;
     }
+    var pre = await SharedPreferences.getInstance();
+    await pre.setString("token", response.data["token"] as String);
     if (!mounted) {
       return;
     }
